@@ -59,8 +59,8 @@ pipelines:
               timeout: 0
               tasks:
                 - exec:
-                  command: bash
                   arguments:
-                 - -c
-                - |
-                    rsync -avz --delete  ./ lara@192.168.23.147:/home/lara/htdocs/lara.trusmiverse.com/                   
+                  - -c
+                  - |
+                      rsync -avz --delete  ./ lara@192.168.23.147:/home/lara/htdocs/lara.trusmiverse.com/
+                  command: bash                   
