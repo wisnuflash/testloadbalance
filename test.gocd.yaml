@@ -44,5 +44,33 @@ pipelines:
                 - install
                 command: composer
                 run_if: passed
+      - deploy:
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
+          allow_only_on_success: false
+        jobs:
+          checkout:
+            resources:
+               - firefox
+            timeout: 0
+            environment_variables:
+              PHP_VERSION: '8.2'
+            secure_variables:
+              github_username: AES:aT+mGAeKT+7rxyGlgzl/QA==:6bF34q0mQjT+w94lAVjthorBL8OF8E93TIBpvRIKaVGIXwGm1OFgHM+rdDGdvO7J
+              github_password: AES:53+anGIgbakgLm3Adxu0mg==:Rpu9gKLqiYepKdckSfm1R4NZyIcJUYYWTZCjoBuUUmDdJAw0CL4ULANGW0XoPUJh
+            tasks:
+              - exec:
+                 command: bash
+                 arguments:
+                 - -c
+                 - |
+                    - |
+                  # Sync files to the deployment server
+                  rsync -avz --delete -e "ssh -pWisnu@24" ./ lara@192.168.23.147:/home/lara/htdocs/lara.trusmiverse.com/
+                  
+                  
     parameters:
       test: 'true'
