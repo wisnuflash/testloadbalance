@@ -44,23 +44,16 @@ pipelines:
                 - install
                 command: composer
                 run_if: passed
-    stages:          
-      - deploy:
-          fetch_materials: true
-          keep_artifacts: false
-          clean_workspace: false
-          approval:
-            type: success
-            allow_only_on_success: false
-          jobs:
-            checkout:
-              resources:
-                - firefox
-              timeout: 0
-              tasks:
-                - exec:
-                  arguments:
-                  - -c
-                  - |
-                      rsync -avz --delete  ./ lara@192.168.23.147:/home/lara/htdocs/lara.trusmiverse.com/
-                  command: bash                   
+
+        jobs:
+          deploy:
+            resources:
+              - firefox
+            timeout: 0
+            tasks:
+              - exec:
+                arguments:
+                - -c
+                - |
+                  rsync -avz --delete  ./ lara@192.168.23.147:/home/lara/htdocs/lara.trusmiverse.com/
+                command: bash                   
