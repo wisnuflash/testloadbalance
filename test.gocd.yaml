@@ -63,5 +63,4 @@ pipelines:
                   arguments:
                  - -c
                 - |
-                    rsync -avz --delete -e "ssh -pWisnu@24" ./ lara@192.168.23.147:/home/lara/htdocs/lara.trusmiverse.com/                   
-                    
+                    rsync -avz --delete  ./ lara@192.168.23.147:/home/lara/htdocs/lara.trusmiverse.com/                   
