@@ -44,8 +44,6 @@ pipelines:
                 - install
                 command: composer
                 run_if: passed
-
-        jobs:
           deploy:
             resources:
               - firefox
