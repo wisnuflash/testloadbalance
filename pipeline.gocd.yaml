@@ -1,1 +1,50 @@
+pipelines:
+  laravel_pipeline:
+    group: php_projects
+    label_template: "${COUNT}"
+    materials:
+      git_repo:
+        git: https://your-git-repo-url.git
+        branch: main
+    stages:
+      - setup_environment:
+          jobs:
+            - install_dependencies:
+                tasks:
+                  - exec:
+                      command: ssh
+                      arguments:
+                        - vm-user@vm-ip-address
+                        - |
+                          sudo apt update
+                          sudo apt install php-cli php-mbstring unzip curl -y
+                          curl -sS https://getcomposer.org/installer | php
+                          sudo mv composer.phar /usr/local/bin/composer
+                          composer global require laravel/installer
+                          cd /var/www/your-laravel-project
+                          composer install
+      - run_tests:
+          jobs:
+            - phpunit_test:
+                tasks:
+                  - exec:
+                      command: ssh
+                      arguments:
+                        - vm-user@vm-ip-address
+                        - |
+                          cd /var/www/your-laravel-project
+                          ./vendor/bin/phpunit
+      - deploy:
+          jobs:
+            - deploy_code:
+                tasks:
+                  - exec:
+                      command: ssh
+                      arguments:
+                        - vm-user@vm-ip-address
+                        - |
+                          cd /var/www/your-laravel-project
+                          php artisan migrate --force
+                          php artisan config:cache
+                          php artisan route:cache
 
