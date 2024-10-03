@@ -39,5 +39,10 @@ pipelines:
                 run_if: passed
             - exec:
                 command: pwd
+            - exec:
+                arguments:
+                - install
+                command: composer
+                run_if: passed
     parameters:
       test: 'true'
