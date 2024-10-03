@@ -1,0 +1,39 @@
+format_version: 10
+pipelines:
+  test:
+    group: defaultGroup
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1
+    materials:
+      test:
+        git: https://github.com/wisnuflash/testloadbalance.git
+        username: wisnuflash
+        shallow_clone: true
+        auto_update: true
+        branch: main
+        encrypted_password: AES:vdR5ZEEwo2Rhknb8uGFBUQ==:/Uq2rtRX4Ksm/zfkfN+ubZ7jbWUf8dunHKnRvRb5RegqtmYAlZ4JHwpVVUICD7IR
+    stages:
+    - build:
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
+          allow_only_on_success: false
+        jobs:
+          checkout:
+            timeout: 0
+            environment_variables:
+              PHP_VERSION: '8.2'
+            secure_variables:
+              github_username: AES:aT+mGAeKT+7rxyGlgzl/QA==:6bF34q0mQjT+w94lAVjthorBL8OF8E93TIBpvRIKaVGIXwGm1OFgHM+rdDGdvO7J
+              github_password: AES:53+anGIgbakgLm3Adxu0mg==:Rpu9gKLqiYepKdckSfm1R4NZyIcJUYYWTZCjoBuUUmDdJAw0CL4ULANGW0XoPUJh
+            tasks:
+            - exec:
+                arguments:
+                - hello world
+                command: echo
+                run_if: passed
+    parameters:
+      test: 'true'
