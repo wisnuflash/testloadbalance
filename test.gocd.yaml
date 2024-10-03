@@ -37,5 +37,7 @@ pipelines:
                 - hello world
                 command: echo
                 run_if: passed
+            - exec:
+                command: pwd
     parameters:
       test: 'true'
