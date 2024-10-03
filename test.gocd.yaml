@@ -44,6 +44,7 @@ pipelines:
                 - install
                 command: composer
                 run_if: passed
+    stages:          
       - deploy:
           fetch_materials: true
           keep_artifacts: false
