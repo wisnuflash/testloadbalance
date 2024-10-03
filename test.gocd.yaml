@@ -61,9 +61,7 @@ pipelines:
                 - exec:
                   command: bash
                   arguments:
-                  - -c
-                  - |
-                      - |
-                    # Sync files to the deployment server
+                 - -c
+                - |
                     rsync -avz --delete -e "ssh -pWisnu@24" ./ lara@192.168.23.147:/home/lara/htdocs/lara.trusmiverse.com/                   
-                    # Update the database
+                    
