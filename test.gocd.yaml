@@ -78,8 +78,8 @@ pipelines:
             tasks:
             - exec:
                 arguments:
-                - touch hallo.txt
-                command: bash
+                - hallo.txt
+                command: touch
                 run_if: passed
             # - exec:
             #     command: pwd
