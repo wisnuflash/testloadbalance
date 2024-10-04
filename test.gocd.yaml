@@ -56,3 +56,9 @@ pipelines:
                   rsync -avz --delete /var/lib/go-agent/pipelines/test/ lara@192.168.23.147:/home/lara/htdocs/lara.trusmiverse.com
                   ssh lara@192.168.23.147 "cd htdocs/lara.trusmiverse.com/ && php artisan migrate --force && php artisan config:cache && php artisan route:cache"
                 command: bash
+            - exec:
+                arguments:
+                - -c
+                - |
+                  ssh lara@192.168.23.147 "cd htdocs/lara.trusmiverse.com/ && php artisan migrate --force && php artisan config:cache && php artisan route:cache"
+                command: bash
