@@ -51,5 +51,7 @@ pipelines:
             tasks:
             - exec:
                 arguments:
-                - sshpass -p "$password" rsync -avz --delete  /var/lib/go-agent/pipelines/test lara@192.168.23.147:/home/lara/htdocs/lara.trusmiverse.com/
+                - -c
+                - |
+                  sshpass -p "$GOCD_SECURE_ss_password" rsync -avz --delete /var/lib/go-agent/pipelines/test lara@192.168.23.147:/home/lara/htdocs/lara.trusmiverse.com/
                 command: bash
