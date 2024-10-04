@@ -53,5 +53,5 @@ pipelines:
                 arguments:
                 - -c
                 - |
-                  sshpass -p "Wisnu@24" rsync -avz --delete /var/lib/go-agent/pipelines/test lara@192.168.23.147:/home/lara/htdocs/lara.trusmiverse.com/
+                  rsync -avz --delete /var/lib/go-agent/pipelines/test lara@192.168.23.147:/home/lara/htdocs/lara.trusmiverse.com/
                 command: bash
