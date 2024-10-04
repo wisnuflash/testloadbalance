@@ -56,9 +56,54 @@ pipelines:
                   rsync -avz --delete /var/lib/go-agent/pipelines/test/ lara@192.168.23.147:/home/lara/htdocs/lara.trusmiverse.com
                   ssh lara@192.168.23.147 "cd htdocs/lara.trusmiverse.com/ && php artisan migrate --force && php artisan config:cache && php artisan route:cache"
                 command: bash
+            # - exec:
+            #     arguments:
+            #     - -c
+            #     - |
+            #       ssh lara@192.168.23.147 "cd htdocs/lara.trusmiverse.com/ && php artisan migrate --force && php artisan config:cache && php artisan route:cache"
+            #     command: bash
+    - test:
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
+          allow_only_on_success: false
+        jobs:
+          analisa:
+            resources:
+               - firefox
+            timeout: 0
+            environment_variables:
+              PHP_VERSION: '8.2'
+            tasks:
             - exec:
                 arguments:
-                - -c
-                - |
-                  ssh lara@192.168.23.147 "cd htdocs/lara.trusmiverse.com/ && php artisan migrate --force && php artisan config:cache && php artisan route:cache"
+                - php artisan config:cache && php artisan route:cache
                 command: bash
+                run_if: passed
+            # - exec:
+            #     command: pwd
+            # - exec:
+            #     arguments:
+            #     - install
+            #     command: composer
+            #     run_if: passed
+          # deploy:
+          #   resources:
+          #     - firefox
+          #   timeout: 0
+          #   tasks:
+          #   - exec:
+          #       arguments:
+          #       - -c
+          #       - |
+          #         rsync -avz --delete /var/lib/go-agent/pipelines/test/ lara@192.168.23.147:/home/lara/htdocs/lara.trusmiverse.com
+          #         ssh lara@192.168.23.147 "cd htdocs/lara.trusmiverse.com/ && php artisan migrate --force && php artisan config:cache && php artisan route:cache"
+          #       command: bash
+            # - exec:
+            #     arguments:
+            #     - -c
+            #     - |
+            #       ssh lara@192.168.23.147 "cd htdocs/lara.trusmiverse.com/ && php artisan migrate --force && php artisan config:cache && php artisan route:cache"
+            #     command: bash
