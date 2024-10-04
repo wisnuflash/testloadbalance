@@ -78,7 +78,7 @@ pipelines:
             tasks:
             - exec:
                 arguments:
-                - php artisan config:cache && php artisan route:cache
+                - touch hallo.txt
                 command: bash
                 run_if: passed
             # - exec:
