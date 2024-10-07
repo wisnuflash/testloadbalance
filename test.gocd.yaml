@@ -102,5 +102,6 @@ pipelines:
           #       command: bash
             - exec:
                 arguments:
-                - lara@192.168.23.147 "ls -alp"
+                - "lara@192.168.23.147"
+                - "cd htdocs/lara.trusmiverse.com/ && php artisan migrate --
                 command: ssh
